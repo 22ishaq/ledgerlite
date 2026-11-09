@@ -16,3 +16,7 @@ updates:
     directory: /
     schedule:
       interval: monthly
+    ignore:
+      # stay on the Java 21 LTS until the build image moves too
+      - dependency-name: eclipse-temurin
+        update-types: ["version-update:semver-major"]

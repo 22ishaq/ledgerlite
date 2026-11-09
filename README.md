@@ -104,7 +104,7 @@ Every push and pull request runs:
 - a Docker image build
 - on pull requests, GitHub's dependency review, which fails on any new dependency with a high or critical advisory
 
-Dependabot keeps Maven, Actions and the base images up to date.
+Every action is pinned to a full commit SHA. Dependabot keeps Maven, the action pins and the base images up to date.
 
 ## Roadmap
 

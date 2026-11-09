@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: ${LEDGERLITE_TEST_DB_URL:jdbc:postgresql://localhost:5432/ledgerlite_test}
+    username: ${LEDGERLITE_TEST_DB_USER:ledgerlite}
+    password: ${LEDGERLITE_TEST_DB_PASSWORD:ledgerlite}

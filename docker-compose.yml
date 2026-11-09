@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: ledgerlite
+      POSTGRES_USER: ledgerlite
+      POSTGRES_PASSWORD: ledgerlite
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/init-test-db.sql:/docker-entrypoint-initdb.d/init-test-db.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ledgerlite"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/ledgerlite
+      DATABASE_USER: ledgerlite
+      DATABASE_PASSWORD: ledgerlite
+      # local only - creates a client with this key on startup
+      LEDGERLITE_BOOTSTRAP_API_KEY: ll_local_dev_key
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:

@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: ledgerlite
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/ledgerlite}
+    username: ${DATABASE_USER:ledgerlite}
+    password: ${DATABASE_PASSWORD:ledgerlite}
+    hikari:
+      maximum-pool-size: 10
+  threads:
+    virtual:
+      enabled: true
+
+server:
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
